@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="前进" v-show="index != 0" @click="moveFront">
+        <img :src="images[index]">
+        <input type="button" value="后退" v-if="index < images.length - 1" @click="moveBack">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                isShowFront: false,
+                isShowBack: true,
+                index : 0,
+                images:['image/0b54be04b6b24b29da6baeca96d5ec0c.jpg', 'image/75d19bdf0993ead46c6932a03a4ac8a8.jpg', 
+                'image/78e3bb0234f88e3706a96b0d79fa15d6.jpg', 'image/979f0bda00c5bdc1c540c6ef6e0337fe.jpg', 
+                'image/e8a4c90f3d055770ee622154af8df189.jpg', 'image/sample_3_1610.png', 'image/sample_4_1610.png']
+            },
+            methods:{
+                moveFront:function() {
+                    this.index--;  
+                },
+                moveBack:function(){
+                    this.index++;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   
+    <div id="app">
+            <input type="button" value="获取笑话" @click="findJoke">
+            <p> {{ joke }}</p>
+        <ul>
+            <li v-for="(item, index) in jokes">{{ item }}</li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>  
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                jokes: ['哈哈哈'],
+                joke:''
+            },
+            methods:{
+                findJoke:function(){
+                    var that = this;
+                    axios.get("https://autumnfish.cn/api/joke").then(function(res){
+                        console.log(res.data);
+                        that.joke = res.data;
+                        that.jokes.push(res.data);
+                    }, function(error){
+                        console.log(error)
+                    })
+                }
+            }
+        })
+    </script>
+    
+</body>
+</html>

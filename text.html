@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .text{
+            border: 1px solid grey;
+            width: 30%;
+            margin: 0px, auto;
+        }
+        #app{
+            border: 1px solid blue;
+            width: 400px; 
+            height: 600px;
+        }
+        #textNode{
+            size: 4px;
+            font-size: 40px;
+            text-align: center;
+            border: 1px solid pink;
+        }
+        .inner{
+            float: right;
+            border: 1px, solid, green;
+            width: 20;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div id="textNode" >alex‘s textnode</div>
+        <input type="text" name="" id="te" v-model="newSchedual" @keyup.enter="add">
+        <div v-for="(item, index) in scheduals" class="text" @mouseover="mouseover(index)">
+            {{index + 1}} : {{ item }}
+            <div class="inner" v-show="isShow" id="" @click="deleteTheLast(index)">x</div>
+        </div>
+        <div>{{ scheduals.length }}留下</div>
+        <input type="button" value="删除一条" @click="deleteTheLast(this.scheduals.length - 1)" v-show="this.scheduals.length != 0">
+        <input type="button" value="全部删除" @click="deleteAll" v-show="this.scheduals.length != 0">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                scheduals: ['吃饭', '睡觉', '打豆豆'],
+                isShow: false,
+                newSchedual:"",
+                index:3
+            },
+            methods:{
+                mouseover:function(index) {
+                    this.isShow = true
+                },
+                deleteTheLast:function(index) {
+                    this.scheduals.splice(index, 1)
+                },
+                deleteAll:function() {
+                    this.scheduals = [];
+                },
+                add:function(){
+                    this.scheduals.push(this.newSchedual);
+                }
+            }
+        })
+    </script>
+</body>
+</html>
